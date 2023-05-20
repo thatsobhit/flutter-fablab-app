@@ -5,26 +5,32 @@ class LoginField extends StatelessWidget {
   final String hintText;
   final IconData? customIcon;
   final Color? customIconColor;
-  final TextEditingController controller; // Add the TextEditingController parameter
-
+  final TextEditingController
+      controller;
+  final String? Function(String?)? validator;
+  
   const LoginField({
     Key? key,
     required this.hintText,
     this.customIcon,
     this.customIconColor,
+    this.validator,
     required this.controller, // Initialize the TextEditingController parameter
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16), // Add horizontal padding
+      padding:
+          const EdgeInsets.symmetric(horizontal: 16), // Add horizontal padding
       child: ConstrainedBox(
         constraints: const BoxConstraints(
           maxWidth: 400,
         ),
         child: TextFormField(
-          controller: controller, // Assign the provided controller to the TextFormField
+          controller:
+              controller, // Assign the provided controller to the TextFormField
+          validator: validator,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(27),
             enabledBorder: OutlineInputBorder(
@@ -44,9 +50,9 @@ class LoginField extends StatelessWidget {
             hintText: hintText,
             prefixIcon: customIcon != null
                 ? Icon(
-              customIcon,
-              color: customIconColor,
-            )
+                    customIcon,
+                    color: customIconColor,
+                  )
                 : null,
           ),
         ),
